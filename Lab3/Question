@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+public class Question {
+    private String questionText;
+    private String answer;
+    private int difficulty;
+
+    public Question(String text, String answer, int diff) {
+        questionText = text;
+        this.answer = answer;
+        difficulty = diff;
+    }
+
+    public String getQuestion() {
+        return questionText;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public int getDifficulty() {
+        return difficulty;
+    }
+
+    public void changeQuestion() {
+        Scanner input = new Scanner(System.in);
+        questionText = input.nextLine();
+    }
+
+    public void changeAnswer() {
+        Scanner input = new Scanner(System.in);
+        answer = input.nextLine();
+    }
+
+    public void changeDifficulty() {
+        Scanner input = new Scanner(System.in);
+        int a = input.nextInt();
+        if (a > 3) {
+            System.out.println("That's too hard");
+        } else {
+            difficulty = a;
+        }
+    }
+}
