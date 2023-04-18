@@ -1,0 +1,112 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class QuizClass {
+
+    private List<Question> questionBank = new ArrayList<>();
+
+    public void addQuestion(String questionText, String answer, int diff) {
+        Question q = new Question(questionText, answer, diff);
+        questionBank.add(q);
+    }
+
+    public void removeQuestion() {
+        int num = 1;
+        for (int i = 0; i < questionBank.size(); i++) {
+            System.out.println(num++ + " " + questionBank.get(i).getQuestion());
+        }
+        System.out.println("Which question would you like to remove?");
+        Scanner scanner = new Scanner(System.in);
+        String remove = scanner.nextLine();
+        for (int i = questionBank.size() - 1; i >= 0; i--) {
+            if (questionBank.get(i).getQuestion().equals(remove)) {
+                questionBank.remove(i);
+            }
+        }
+    }
+
+    public void modifyQuestion() {
+        int num = 1;
+        for (int i = 0; i < questionBank.size(); i++) {
+            System.out.println(num++ + " " + questionBank.get(i).getQuestion());
+        }
+        System.out.println("Which question would you like to change?");
+        Scanner scanner = new Scanner(System.in);
+        String change = scanner.nextLine();
+        System.out.println("Enter the new question");
+        String changeQuestion = scanner.nextLine();
+        System.out.println("Enter the new answer");
+        String changeAnswer = scanner.nextLine();
+        System.out.println("Enter the new difficulty");
+        int changeDiff = Integer.parseInt(scanner.nextLine());
+        for (int i = questionBank.size() - 1; i >= 0; i--) {
+            if (questionBank.get(i).getQuestion().equals(change)) {
+                questionBank.set(i, new Question(changeQuestion, changeAnswer, changeDiff));
+            }
+        }
+    }
+
+    public void giveQuiz() {
+        int correct = 0;
+        int score = questionBank.size();
+        String answer;
+        for (int i = 0; i < questionBank.size(); i++) {
+            System.out.println(questionBank.get(i).getQuestion());
+            Scanner scanner = new Scanner(System.in);
+            answer = scanner.nextLine();
+            score++;
+            if (answer.equals(questionBank.get(i).getAnswer())) {
+                correct++;
+                System.out.println("You got it right!");
+            } else {
+                System.out.println("You got it wrong :(");
+            }
+        }
+        System.out.println("You got " + correct + " right");
+    }
+
+    private static class Question {
+        private String questionText;
+        private String answer;
+        private int difficulty;
+
+        public Question(String text, String answer, int diff) {
+            questionText = text;
+            this.answer = answer;
+            difficulty = diff;
+        }
+
+        public String getQuestion() {
+            return questionText;
+        }
+
+        public String getAnswer() {
+            return answer;
+        }
+
+        public int getDifficulty() {
+            return difficulty;
+        }
+
+        public void changeQuestion() {
+            Scanner scanner = new Scanner(System.in);
+            questionText = scanner.nextLine();
+        }
+
+        public void changeAnswer() {
+            Scanner scanner = new Scanner(System.in);
+            answer = scanner.nextLine();
+        }
+
+        public void changeDifficulty() {
+            Scanner scanner = new Scanner(System.in);
+            int a = Integer.parseInt(scanner.nextLine());
+            if (a > 3) {
+                System.out.println("Thats too hard");
+            } else {
+                difficulty = a;
+            }
+        }
+    }
+}
