@@ -1,0 +1,34 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        QuizClass newQuiz = new QuizClass();
+
+        int choice;
+        do {
+            Scanner input = new Scanner(System.in);
+            System.out.println("1. Add a question to the quiz");
+            System.out.println("2. Remove a question from the quiz");
+            System.out.println("3. Modify a question in the quiz");
+            System.out.println("4. Take the quiz");
+            System.out.println("5. Quit");
+            choice = input.nextInt();
+
+            if (choice == 1) {
+                System.out.println("What is the question text?");
+                String questionText = input.nextLine();
+                System.out.println("What is the question answer?");
+                String questionAnswer = input.nextLine();
+                System.out.println("What is the question difficulty?");
+                int questionDiff = input.nextInt();
+                newQuiz.add_question(questionText, questionAnswer, questionDiff);
+            } else if (choice == 2) {
+                newQuiz.remove_question();
+            } else if (choice == 3) {
+                newQuiz.modify_question();
+            } else if (choice == 4) {
+                newQuiz.give_quiz();
+            }
+        } while (choice < 5);
+    }
+}
